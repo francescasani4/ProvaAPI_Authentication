@@ -14,6 +14,7 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="6.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,6 +24,9 @@
     <None Remove="DTO\" />
     <None Remove="Database\" />
     <None Remove="Authentication\" />
+    <None Remove="Authentication\Middleware\" />
+    <None Remove="Authentication\CustomAttributes\" />
+    <None Remove="Authentication\Policy\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />
@@ -31,5 +35,8 @@
     <Folder Include="DTO\" />
     <Folder Include="Database\" />
     <Folder Include="Authentication\" />
+    <Folder Include="Authentication\Middleware\" />
+    <Folder Include="Authentication\CustomAttributes\" />
+    <Folder Include="Authentication\Policy\" />
   </ItemGroup>
 </Project>

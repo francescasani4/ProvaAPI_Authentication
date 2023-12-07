@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using ProvaAPI_Authentication.Authentication.CustomAttributes;
 using ProvaAPI_Authentication.Database;
 using ProvaAPI_Authentication.DTO;
 using ProvaAPI_Authentication.Entity;
@@ -16,9 +18,12 @@ namespace ProvaAPI_Authentication.Controllers
     {
         private readonly MyDbContext _dbContext;
 
-        public UsersController(MyDbContext dbContext)
+        //private readonly IApiKeyValidation _apiKeyValidation;
+
+        public UsersController(MyDbContext dbContext) //, IApiKeyValidation apiKeyValidation
         {
             _dbContext = dbContext;
+            //_apiKeyValidation = apiKeyValidation;
         }
 
         [HttpGet]
@@ -36,8 +41,21 @@ namespace ProvaAPI_Authentication.Controllers
         }
 
         [HttpGet]
+        [Authorize(Policy = "ApiKeyPolicy")]
+        //[ApiKey]
         public IActionResult GetAllUsers(string? name, string? surname)
         {
+            // logica per verificare il passaggio corretto della chiave
+            /*string? apiKey = Request.Headers[ApiKeyConstants.ApiKeyHeaderName];
+
+            if (string.IsNullOrWhiteSpace(apiKey))
+                return BadRequest();
+
+            bool isValid = _apiKeyValidation.IsValidApiKey(apiKey);
+
+            if(!isValid)
+                return Unauthorized();*/
+
             IQueryable<UserEntity> query = _dbContext.Users;
 
             if(!string.IsNullOrEmpty(name))

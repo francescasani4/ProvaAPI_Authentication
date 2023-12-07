@@ -32,7 +32,7 @@ namespace ProvaAPI_Authentication.Controllers
                 .FirstOrDefault(b => b.IdBook == idBook); ;
 
             if (book == null)
-                return NotFound();
+                return NotFound("Libro non trovato");
 
             var b = MapBookEntityToBookModel(book);
 
